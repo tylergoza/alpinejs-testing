@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>alpine.js testing</title>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+    <section
+        x-data="{
+            heading: 'Testing alpine event passing',
+            button_1_text: 'Button 1',
+            button_2_text: 'Button 2',
+            paragraph_text: ''
+        }"
+        @update_data="Object.assign($data, event.detail)"
+    >
+        <h1 x-text="heading"></h1>
+        <button x-text="button_1_text"
+                @click="$dispatch('handle_button_click',
+                        {value: 'Button 1 clicked', respond_event: 'update_data', respond_target: $root, data: $data})">
+        </button>
+        <button x-text="button_2_text"
+                @click="$dispatch('handle_button_click',
+                        {value: 'Button 2 clicked', respond_event: 'update_data', respond_target: $root, data: $data})">
+        </button>
+        <p x-text="paragraph_text"></p>
+    </section>
+    <section
+        x-data="{
+            heading: 'Testing alpine event passing',
+            button_1_text: 'Button 3',
+            button_2_text: 'Button 4',
+            paragraph_text: ''
+        }"
+        @update_data="Object.assign($data, event.detail)"
+    >
+        <h1 x-text="heading"></h1>
+        <button x-text="button_1_text"
+                @click="$dispatch('handle_button_click',
+                        {value: 'Button 3 clicked', respond_event: 'update_data', respond_target: $root, data: $data})">
+        </button>
+        <button x-text="button_2_text"
+                @click="$dispatch('handle_button_click',
+                        {value: 'Button 4 clicked', respond_event: 'update_data', respond_target: $root, data: $data})">
+        </button>
+        <p x-text="paragraph_text"></p>
+    </section>
+    <script src="/scripts/site.js"></script>
+</body>
+</html>
